@@ -1,0 +1,33 @@
+{
+  "source": [
+    "aws.ec2"
+  ],
+  "detail-type": [
+    "AWS API Call via CloudTrail"
+  ],
+  "detail": {
+    "eventSource": [
+      "ec2.amazonaws.com"
+    ],
+    "eventName": [
+      "AuthorizeSecurityGroupIngress",
+      "AuthorizeSecurityGroupEgress",
+      "RevokeSecurityGroupIngress",
+      "RevokeSecurityGroupEgress",
+      "ModifySecurityGroupRules",
+      "CreateSecurityGroup",
+      "DeleteSecurityGroup",
+      "CreateNetworkAclEntry",
+      "ReplaceNetworkAclEntry",
+      "DeleteNetworkAclEntry",
+      "CreateRoute",
+      "ReplaceRoute",
+      "DeleteRoute",
+      "AttachInternetGateway",
+      "DetachInternetGateway",
+      "DeleteNatGateway",
+      "DeleteVpc",
+      "DeleteSubnet"
+    ]
+  }
+}

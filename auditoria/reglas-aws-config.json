@@ -1,0 +1,44 @@
+[
+  {
+    "ConfigRuleName": "s3-bucket-public-read-prohibited",
+    "Source": {
+      "Owner": "AWS",
+      "SourceIdentifier": "S3_BUCKET_PUBLIC_READ_PROHIBITED"
+    }
+  },
+  {
+    "ConfigRuleName": "s3-bucket-public-write-prohibited",
+    "Source": {
+      "Owner": "AWS",
+      "SourceIdentifier": "S3_BUCKET_PUBLIC_WRITE_PROHIBITED"
+    }
+  },
+  {
+    "ConfigRuleName": "restricted-ssh",
+    "Source": {
+      "Owner": "AWS",
+      "SourceIdentifier": "INCOMING_SSH_DISABLED"
+    }
+  },
+  {
+    "ConfigRuleName": "rds-instance-public-access-check",
+    "Source": {
+      "Owner": "AWS",
+      "SourceIdentifier": "RDS_INSTANCE_PUBLIC_ACCESS_CHECK"
+    }
+  },
+  {
+    "ConfigRuleName": "cloudtrail-enabled",
+    "Source": {
+      "Owner": "AWS",
+      "SourceIdentifier": "CLOUD_TRAIL_ENABLED"
+    }
+  },
+  {
+    "ConfigRuleName": "vpc-flow-logs-enabled",
+    "Source": {
+      "Owner": "AWS",
+      "SourceIdentifier": "VPC_FLOW_LOGS_ENABLED"
+    }
+  }
+]

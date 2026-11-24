@@ -1,0 +1,21 @@
+Servicio,Métrica,Condición (umbral),Periodo y evaluación,Severidad,Acción de alerta
+Auto Scaling,GroupInServiceInstances,< 2 instancias,5 min · 2 de 2 períodos,Crítica,SNS edustart-alertas-criticas → admin@example.com
+EC2,StatusCheckFailed,>= 1,5 min · 2 de 2 períodos,Crítica,SNS edustart-alertas-criticas → admin@example.com
+EC2,CPUUtilization (promedio del ASG),> 80 %,5 min · 3 de 3 períodos,Aviso,SNS edustart-alertas-aviso → admin@example.com
+ALB,UnHealthyHostCount,>= 1,5 min · 1 de 1 período,Crítica,SNS edustart-alertas-criticas → admin@example.com
+ALB,Tasa 5XX = HTTPCode_Target_5XX_Count / RequestCount × 100,> 2 %,5 min · 2 de 2 períodos,Crítica,SNS edustart-alertas-criticas → admin@example.com
+ALB,TargetResponseTime (p95),> 1 s,5 min · 3 de 3 períodos,Aviso,SNS edustart-alertas-aviso → admin@example.com
+NAT Gateway,ErrorPortAllocation,> 0,5 min · 1 de 1 período,Aviso,SNS edustart-alertas-aviso → admin@example.com
+NAT Gateway,BytesOutToDestination,Fuera de la banda de detección de anomalías (2 desvíos),5 min · 3 de 3 períodos,Aviso,SNS edustart-alertas-aviso → admin@example.com
+VPC,ConexionesRechazadas (filtro de métricas sobre Flow Logs),> 100,5 min · 1 de 1 período,Aviso,SNS edustart-alertas-aviso → admin@example.com
+RDS,FreeStorageSpace,< 3 GiB (15 % de 20 GiB),5 min · 1 de 1 período,Crítica,SNS edustart-alertas-criticas → admin@example.com
+RDS,CPUUtilization,> 80 %,5 min · 3 de 3 períodos,Aviso,SNS edustart-alertas-aviso → admin@example.com
+RDS,FreeableMemory,< 100 MB,5 min · 3 de 3 períodos,Aviso,SNS edustart-alertas-aviso → admin@example.com
+Lambda,Errors (enviar-bienvenida),> 0,5 min · 1 de 1 período,Aviso,SNS edustart-alertas-aviso → admin@example.com
+Billing,EstimatedCharges,> USD 210 (se superó el gasto estimado del mes),6 h · 1 de 1 período,Aviso,SNS edustart-alertas-aviso → admin@example.com
+Billing,EstimatedCharges,> USD 230 (se superó el presupuesto),6 h · 1 de 1 período,Crítica,SNS edustart-alertas-criticas → admin@example.com
+AWS Budgets,Gasto proyectado a fin de mes,> USD 230,Revisión diaria de Budgets,Aviso,Correo a admin@example.com
+CloudTrail + EventBridge,Cambio en Security Groups / NACL / rutas / IGW / NAT / VPC,Cualquier evento de la lista,Inmediato (por evento),Crítica,SNS edustart-alertas-criticas → admin@example.com
+CloudTrail + EventBridge,StopLogging / DeleteTrail / UpdateTrail,Cualquier evento,Inmediato (por evento),Crítica,SNS edustart-alertas-criticas → admin@example.com
+AWS Config,Regla pasa a NON_COMPLIANT,Cualquier recurso no conforme,Inmediato (por evento),Aviso,SNS edustart-alertas-aviso → admin@example.com
+CloudTrail + CloudWatch Logs,CambiosRed (filtro de métricas sobre el log group del trail),>= 1,5 min · 1 de 1 período,Crítica,SNS edustart-alertas-criticas → admin@example.com

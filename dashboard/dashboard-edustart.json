@@ -1,0 +1,457 @@
+{
+  "widgets": [
+    {
+      "type": "alarm",
+      "x": 0,
+      "y": 0,
+      "width": 9,
+      "height": 6,
+      "properties": {
+        "title": "Estado de alarmas",
+        "alarms": [
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:edustart-asg-instancias-bajo-minimo",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:edustart-alb-hosts-no-saludables",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:edustart-alb-tasa-5xx",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:edustart-rds-espacio-libre-bajo",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:edustart-facturacion-presupuesto-superado",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:edustart-ec2-status-check",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:edustart-cambio-red"
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 9,
+      "y": 0,
+      "width": 5,
+      "height": 6,
+      "properties": {
+        "title": "Instancias EC2 saludables",
+        "view": "singleValue",
+        "region": "us-east-1",
+        "stat": "Minimum",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/ApplicationELB",
+            "HealthyHostCount",
+            "TargetGroup",
+            "targetgroup/edustart-web/0123456789abcdef",
+            "LoadBalancer",
+            "app/edustart-alb/0123456789abcdef"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 14,
+      "y": 0,
+      "width": 5,
+      "height": 6,
+      "properties": {
+        "title": "Errores 5XX (última hora)",
+        "view": "singleValue",
+        "region": "us-east-1",
+        "stat": "Sum",
+        "period": 3600,
+        "metrics": [
+          [
+            "AWS/ApplicationELB",
+            "HTTPCode_Target_5XX_Count",
+            "LoadBalancer",
+            "app/edustart-alb/0123456789abcdef"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 19,
+      "y": 0,
+      "width": 5,
+      "height": 6,
+      "properties": {
+        "title": "Gasto estimado del mes (USD) · presupuesto 230",
+        "view": "singleValue",
+        "region": "us-east-1",
+        "stat": "Maximum",
+        "period": 21600,
+        "metrics": [
+          [
+            "AWS/Billing",
+            "EstimatedCharges",
+            "Currency",
+            "USD"
+          ]
+        ],
+        "annotations": {
+          "horizontal": [
+            {
+              "label": "Presupuesto USD 230",
+              "value": 230
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 6,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "title": "CPU de las instancias EC2 (%)",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Average",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/EC2",
+            "CPUUtilization",
+            "AutoScalingGroupName",
+            "edustart-asg"
+          ]
+        ],
+        "annotations": {
+          "horizontal": [
+            {
+              "label": "Alarma 80 %",
+              "value": 80
+            }
+          ]
+        },
+        "yAxis": {
+          "left": {
+            "min": 0,
+            "max": 100
+          }
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 8,
+      "y": 6,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "title": "Instancias en servicio (ASG)",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Average",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/AutoScaling",
+            "GroupInServiceInstances",
+            "AutoScalingGroupName",
+            "edustart-asg"
+          ]
+        ],
+        "annotations": {
+          "horizontal": [
+            {
+              "label": "Mínimo 2",
+              "value": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 16,
+      "y": 6,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "title": "Tiempo de respuesta del ALB (s, p95)",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "p95",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/ApplicationELB",
+            "TargetResponseTime",
+            "LoadBalancer",
+            "app/edustart-alb/0123456789abcdef"
+          ]
+        ],
+        "annotations": {
+          "horizontal": [
+            {
+              "label": "Alarma 1 s",
+              "value": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 12,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "title": "Tráfico de los NAT Gateways (bytes)",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Sum",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/NATGateway",
+            "BytesOutToDestination",
+            "NatGatewayId",
+            "nat-0aaaaaaaaaaaaaaaa",
+            {
+              "label": "NAT-A salida"
+            }
+          ],
+          [
+            "AWS/NATGateway",
+            "BytesOutToDestination",
+            "NatGatewayId",
+            "nat-0bbbbbbbbbbbbbbbb",
+            {
+              "label": "NAT-B salida"
+            }
+          ],
+          [
+            "AWS/NATGateway",
+            "BytesInFromDestination",
+            "NatGatewayId",
+            "nat-0aaaaaaaaaaaaaaaa",
+            {
+              "label": "NAT-A entrada"
+            }
+          ],
+          [
+            "AWS/NATGateway",
+            "BytesInFromDestination",
+            "NatGatewayId",
+            "nat-0bbbbbbbbbbbbbbbb",
+            {
+              "label": "NAT-B entrada"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 8,
+      "y": 12,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "title": "Conexiones rechazadas en la VPC",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Sum",
+        "period": 300,
+        "metrics": [
+          [
+            "EduStart/Red",
+            "ConexionesRechazadas"
+          ]
+        ],
+        "annotations": {
+          "horizontal": [
+            {
+              "label": "Alarma 100 / 5 min",
+              "value": 100
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 16,
+      "y": 12,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "title": "Solicitudes y errores del ALB",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Sum",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/ApplicationELB",
+            "RequestCount",
+            "LoadBalancer",
+            "app/edustart-alb/0123456789abcdef"
+          ],
+          [
+            "AWS/ApplicationELB",
+            "HTTPCode_Target_5XX_Count",
+            "LoadBalancer",
+            "app/edustart-alb/0123456789abcdef"
+          ],
+          [
+            "AWS/ApplicationELB",
+            "HTTPCode_ELB_5XX_Count",
+            "LoadBalancer",
+            "app/edustart-alb/0123456789abcdef"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 18,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "title": "RDS: espacio libre (bytes)",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Minimum",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/RDS",
+            "FreeStorageSpace",
+            "DBInstanceIdentifier",
+            "edustart-db"
+          ]
+        ],
+        "annotations": {
+          "horizontal": [
+            {
+              "label": "Alarma < 3 GiB (15 %)",
+              "value": 3221225472
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 6,
+      "y": 18,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "title": "RDS: CPU y conexiones",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Average",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/RDS",
+            "CPUUtilization",
+            "DBInstanceIdentifier",
+            "edustart-db"
+          ],
+          [
+            "AWS/RDS",
+            "DatabaseConnections",
+            "DBInstanceIdentifier",
+            "edustart-db",
+            {
+              "yAxis": "right"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 18,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "title": "Tamaño de los buckets S3 (diario)",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Average",
+        "period": 86400,
+        "metrics": [
+          [
+            "AWS/S3",
+            "BucketSizeBytes",
+            "BucketName",
+            "edustart-static-assets-prod-use1",
+            "StorageType",
+            "StandardStorage"
+          ],
+          [
+            "AWS/S3",
+            "BucketSizeBytes",
+            "BucketName",
+            "edustart-course-content-prod-use1",
+            "StorageType",
+            "IntelligentTieringFAStorage"
+          ],
+          [
+            "AWS/S3",
+            "BucketSizeBytes",
+            "BucketName",
+            "edustart-logs-prod-use1",
+            "StorageType",
+            "StandardStorage"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 18,
+      "y": 18,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "title": "Lambda de bienvenida",
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Sum",
+        "period": 300,
+        "metrics": [
+          [
+            "AWS/Lambda",
+            "Invocations",
+            "FunctionName",
+            "enviar-bienvenida"
+          ],
+          [
+            "AWS/Lambda",
+            "Errors",
+            "FunctionName",
+            "enviar-bienvenida"
+          ],
+          [
+            "AWS/Lambda",
+            "Throttles",
+            "FunctionName",
+            "enviar-bienvenida"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "log",
+      "x": 0,
+      "y": 24,
+      "width": 24,
+      "height": 6,
+      "properties": {
+        "title": "Últimos errores de la aplicación",
+        "view": "table",
+        "region": "us-east-1",
+        "query": "SOURCE '/edustart/app' | SOURCE '/aws/lambda/enviar-bienvenida' | fields @timestamp, @logStream, @message | filter @message like /ERROR/ | sort @timestamp desc | limit 20"
+      }
+    }
+  ]
+}
